@@ -1,3 +1,4 @@
+import useResponsiveLayout from "@src/hooks/useResponsiveLayout";
 import colors from "@src/theme/colors";
 import fonts from "@src/theme/fonts";
 import React from "react";
@@ -14,21 +15,28 @@ interface TextProps extends RNTextProps {
   fontFamily?: string;
 }
 
-const StyledText = styled.Text`
-  font-size: ${(props: TextProps) => props.fontSize ?? fonts.size.regular}px;
-  font-weight: ${(props: TextProps) => props.fontWeight ?? "normal"};
-  line-height: ${(props: TextProps) =>
+const StyledText = styled.Text<TextProps>`
+  font-size: ${(props) => props.fontSize}px;
+  font-weight: ${(props) => props.fontWeight ?? "normal"};
+  line-height: ${(props) =>
     props.lineHeight ? `${props.lineHeight}px` : "undefined"};
-  color: ${(props: TextProps) => props.color ?? colors.dark};
+  color: ${(props) => props.color ?? colors.dark};
 `;
 
 const Text = (props: TextProps) => {
+  const { scaleFont } = useResponsiveLayout();
+
+  const fontSize = props?.fontSize
+    ? scaleFont(props.fontSize)
+    : scaleFont(fonts.size.regular);
+
   return (
     <StyledText
       accessibilityRole="text"
       allowFontScaling={false}
       adjustsFontSizeToFit={false}
       {...props}
+      fontSize={fontSize}
     />
   );
 };

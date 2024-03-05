@@ -5,5 +5,6 @@ export const sectionTitleStyles = StyleSheet.create({
     alignSelf: "center",
     textTransform: "uppercase",
     letterSpacing: 1.5,
+    paddingBottom: 24,
   },
 });

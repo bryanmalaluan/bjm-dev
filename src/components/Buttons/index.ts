@@ -1,3 +1,4 @@
+import Pressable from "./Pressable";
 import SectionPageButton from "./SectionPageButton";
 
-export { SectionPageButton };
+export { Pressable, SectionPageButton };

@@ -12,7 +12,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { LayoutChangeEvent } from "react-native";
 
-const HomePage = () => {
+const RootPage = () => {
   const [containerHeight, setContainerHeight] = React.useState(0);
 
   const onLayout = React.useCallback((event: LayoutChangeEvent) => {
@@ -51,4 +51,4 @@ const HomePage = () => {
   // );
 };
 
-export default HomePage;
+export default RootPage;

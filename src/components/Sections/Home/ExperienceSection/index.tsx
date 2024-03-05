@@ -5,16 +5,20 @@ import React from "react";
 
 interface ExperienceSectionProps {
   containerHeight: number;
+  onPressNextPage?: () => void;
 }
 
-const ExperienceSection = ({ containerHeight }: ExperienceSectionProps) => {
+const ExperienceSection = ({
+  containerHeight,
+  onPressNextPage,
+}: ExperienceSectionProps) => {
   return (
     <SectionContainer containerHeight={containerHeight}>
       <Column style={{ flex: 1, width: "100%" }}>
         <SectionTitle title="Experience" />
       </Column>
 
-      <SectionPageButton />
+      <SectionPageButton onPress={onPressNextPage} />
     </SectionContainer>
   );
 };

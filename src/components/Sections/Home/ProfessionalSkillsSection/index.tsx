@@ -6,10 +6,12 @@ import React from "react";
 
 interface ProfessionalSkillsSectionProps {
   containerHeight: number;
+  onPressNextPage?: () => void;
 }
 
 const ProfessionalSkillsSection = ({
   containerHeight,
+  onPressNextPage,
 }: ProfessionalSkillsSectionProps) => {
   return (
     <SectionContainer
@@ -20,7 +22,7 @@ const ProfessionalSkillsSection = ({
         <SectionTitle title="Professional Skills" />
       </Column>
 
-      <SectionPageButton />
+      <SectionPageButton onPress={onPressNextPage} />
     </SectionContainer>
   );
 };

@@ -12,9 +12,13 @@ import { mainSectionStyles } from "./styles";
 
 interface MainSectionProps {
   containerHeight: number;
+  onPressNextPage?: () => void;
 }
 
-const MainSection = ({ containerHeight }: MainSectionProps) => {
+const MainSection = ({
+  containerHeight,
+  onPressNextPage,
+}: MainSectionProps) => {
   const { scaleSize } = useResponsiveLayout();
 
   return (
@@ -90,7 +94,7 @@ const MainSection = ({ containerHeight }: MainSectionProps) => {
           profession
         </Text>
 
-        <SectionPageButton />
+        <SectionPageButton onPress={onPressNextPage} />
       </Column>
     </SectionContainer>
   );

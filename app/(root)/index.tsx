@@ -1,4 +1,3 @@
-import { ScrollView } from "@src/components/Containers";
 import {
   AboutSection,
   ExperienceSection,
@@ -8,12 +7,23 @@ import {
 } from "@src/components/Sections";
 import colors from "@src/theme/colors";
 import { LinearGradient } from "expo-linear-gradient";
-// import { router } from "expo-router";
 import React from "react";
 import { LayoutChangeEvent } from "react-native";
+import Animated from "react-native-reanimated";
 
 const RootPage = () => {
+  const scrollViewRef = React.useRef<Animated.ScrollView>(null);
   const [containerHeight, setContainerHeight] = React.useState(0);
+
+  const scrollToNextSection = (index: number) => {
+    if (scrollViewRef?.current) {
+      scrollViewRef.current.scrollTo({
+        y: containerHeight * index,
+        x: 0,
+        animated: true,
+      });
+    }
+  };
 
   const onLayout = React.useCallback((event: LayoutChangeEvent) => {
     setContainerHeight(event.nativeEvent.layout.height);
@@ -24,31 +34,33 @@ const RootPage = () => {
       colors={[colors.dark, colors.dark, colors.dark, colors.brand.dark]}
       style={{ flex: 1, width: "100%" }}
     >
-      <ScrollView pagingEnabled onLayout={onLayout}>
-        <MainSection containerHeight={containerHeight} />
-        <AboutSection containerHeight={containerHeight} />
-        <ExperienceSection containerHeight={containerHeight} />
-        <ProfessionalSkillsSection containerHeight={containerHeight} />
+      <Animated.ScrollView
+        ref={scrollViewRef}
+        pagingEnabled
+        scrollEventThrottle={32}
+        style={{ width: "100%" }}
+        onLayout={onLayout}
+      >
+        <MainSection
+          containerHeight={containerHeight}
+          onPressNextPage={() => scrollToNextSection(1)}
+        />
+        <AboutSection
+          containerHeight={containerHeight}
+          onPressNextPage={() => scrollToNextSection(2)}
+        />
+        <ExperienceSection
+          containerHeight={containerHeight}
+          onPressNextPage={() => scrollToNextSection(3)}
+        />
+        <ProfessionalSkillsSection
+          containerHeight={containerHeight}
+          onPressNextPage={() => scrollToNextSection(4)}
+        />
         <GetInTouchSection containerHeight={containerHeight} />
-      </ScrollView>
+      </Animated.ScrollView>
     </LinearGradient>
   );
-
-  // return (
-  //   <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-  //     <Text fontSize={24} style={{ marginBottom: 24 }}>
-  //       This is the home page!
-  //     </Text>
-
-  //     <Pressable
-  //       onPress={() =>
-  //         router.push({ pathname: "users/[id]", params: { id: 2 } })
-  //       }
-  //     >
-  //       <Text fontSize={20}>Go to user</Text>
-  //     </Pressable>
-  //   </View>
-  // );
 };
 
 export default RootPage;

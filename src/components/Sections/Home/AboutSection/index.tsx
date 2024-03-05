@@ -6,9 +6,13 @@ import React from "react";
 
 interface AboutSectionProps {
   containerHeight: number;
+  onPressNextPage?: () => void;
 }
 
-const AboutSection = ({ containerHeight }: AboutSectionProps) => {
+const AboutSection = ({
+  containerHeight,
+  onPressNextPage,
+}: AboutSectionProps) => {
   return (
     <SectionContainer
       containerHeight={containerHeight}
@@ -18,7 +22,7 @@ const AboutSection = ({ containerHeight }: AboutSectionProps) => {
         <SectionTitle title="About" />
       </Column>
 
-      <SectionPageButton />
+      <SectionPageButton onPress={onPressNextPage} />
     </SectionContainer>
   );
 };

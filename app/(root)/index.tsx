@@ -41,23 +41,27 @@ const RootPage = () => {
         style={{ width: "100%" }}
         onLayout={onLayout}
       >
-        <MainSection
-          containerHeight={containerHeight}
-          onPressNextPage={() => scrollToNextSection(1)}
-        />
-        <AboutSection
-          containerHeight={containerHeight}
-          onPressNextPage={() => scrollToNextSection(2)}
-        />
-        <ExperienceSection
-          containerHeight={containerHeight}
-          onPressNextPage={() => scrollToNextSection(3)}
-        />
-        <ProfessionalSkillsSection
-          containerHeight={containerHeight}
-          onPressNextPage={() => scrollToNextSection(4)}
-        />
-        <GetInTouchSection containerHeight={containerHeight} />
+        {containerHeight !== 0 && (
+          <>
+            <MainSection
+              containerHeight={containerHeight}
+              onPressNextPage={() => scrollToNextSection(1)}
+            />
+            <AboutSection
+              containerHeight={containerHeight}
+              onPressNextPage={() => scrollToNextSection(2)}
+            />
+            <ExperienceSection
+              containerHeight={containerHeight}
+              onPressNextPage={() => scrollToNextSection(3)}
+            />
+            <ProfessionalSkillsSection
+              containerHeight={containerHeight}
+              onPressNextPage={() => scrollToNextSection(4)}
+            />
+            <GetInTouchSection containerHeight={containerHeight} />
+          </>
+        )}
       </Animated.ScrollView>
     </LinearGradient>
   );

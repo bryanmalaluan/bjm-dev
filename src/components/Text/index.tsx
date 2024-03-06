@@ -5,18 +5,23 @@ import React from "react";
 import { TextProps as RNTextProps } from "react-native";
 import styled from "styled-components/native";
 
-import { FontWeight } from "../types";
+import { FontFamily, FontSize, FontWeight } from "../types";
 
 interface TextProps extends RNTextProps {
-  fontSize?: number;
+  size?: FontSize;
+  fontFamily?: FontFamily;
   fontWeight?: FontWeight;
   lineHeight?: number;
   color?: string;
-  fontFamily?: string;
 }
 
-const StyledText = styled.Text<TextProps>`
+interface StyledTextProps extends TextProps {
+  fontSize: number;
+}
+
+const StyledText = styled.Text<StyledTextProps>`
   font-size: ${(props) => props.fontSize}px;
+  font-family: ${(props) => props?.fontFamily ?? "Regular"};
   font-weight: ${(props) => props.fontWeight ?? "normal"};
   line-height: ${(props) =>
     props.lineHeight ? `${props.lineHeight}px` : "undefined"};
@@ -26,9 +31,11 @@ const StyledText = styled.Text<TextProps>`
 const Text = (props: TextProps) => {
   const { scaleFont } = useResponsiveLayout();
 
-  const fontSize = props?.fontSize
-    ? scaleFont(props.fontSize)
+  const fontSize = props?.size
+    ? scaleFont(fonts.size[props.size], props.size === "heading")
     : scaleFont(fonts.size.regular);
+
+  const lineHeight = props?.lineHeight ? scaleFont(props.lineHeight) : fontSize;
 
   return (
     <StyledText
@@ -37,6 +44,7 @@ const Text = (props: TextProps) => {
       adjustsFontSizeToFit={false}
       {...props}
       fontSize={fontSize}
+      lineHeight={lineHeight}
     />
   );
 };

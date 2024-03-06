@@ -54,12 +54,12 @@ const MainSection = ({
 
           <Text
             color={colors.light}
-            fontSize={fonts.size.heading}
-            fontWeight="bold"
+            size="heading"
+            fontFamily="Bold"
             style={{
               textTransform: "uppercase",
-              letterSpacing: 1.25,
-              marginTop: 8,
+              letterSpacing: 1.5,
+              marginTop: 16,
             }}
           >
             Bryan James Malaluan
@@ -67,11 +67,11 @@ const MainSection = ({
 
           <Text
             color={colors.brand.light}
-            fontSize={fonts.size.subHeading}
-            fontWeight="bold"
+            size="subHeading"
+            fontFamily="Bold"
             style={{
               textTransform: "uppercase",
-              letterSpacing: 1.25,
+              letterSpacing: 2,
               marginTop: 8,
             }}
           >
@@ -86,8 +86,8 @@ const MainSection = ({
       >
         <Text
           color={colors.light}
-          fontSize={fonts.size.subHeading}
-          fontWeight="bold"
+          size="subHeading"
+          fontFamily="SemiBold"
           style={mainSectionStyles.bottomText}
         >
           Transforming ideas into seamless mobile experiences is my passion and

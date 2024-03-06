@@ -19,8 +19,6 @@ const AboutSection = ({
   containerHeight,
   onPressNextPage,
 }: AboutSectionProps) => {
-  const { scaleFont } = useResponsiveLayout();
-
   return (
     <SectionContainer
       containerHeight={containerHeight}
@@ -31,7 +29,7 @@ const AboutSection = ({
 
         <Text
           color={colors.light}
-          lineHeight={scaleFont(fonts.size.subHeading)}
+          lineHeight={fonts.size.regular + 4}
           style={aboutSectionStyles.summaryText}
         >
           Experienced mobile developer with a proven track record of over 8
@@ -55,23 +53,27 @@ const AboutSection = ({
 
         <Column>
           <Text
-            fontSize={scaleFont(fonts.size.large)}
-            fontWeight="bold"
+            size="large"
+            fontFamily="SemiBold"
             color={colors.light}
             style={aboutSectionStyles.educationText}
           >
             Education
           </Text>
 
-          <Text color={colors.light} style={aboutSectionStyles.courseText}>
+          <Text
+            color={colors.light}
+            lineHeight={fonts.size.regular + 2}
+            style={aboutSectionStyles.courseText}
+          >
             BS IN COMPUTER SCIENCE WITH SPECIALIZATION IN SOFTWARE ENGINEERING
           </Text>
 
           <Text
-            fontSize={scaleFont(fonts.size.small)}
-            fontWeight="bold"
+            size="small"
+            fontFamily="SemiBold"
             color={colors.light}
-            style={{ letterSpacing: 1.25 }}
+            style={{ letterSpacing: 1.5 }}
           >
             FEU Institute of Technology
           </Text>

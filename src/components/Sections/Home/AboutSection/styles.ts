@@ -7,15 +7,15 @@ export const aboutSectionStyles = StyleSheet.create({
   },
   summaryText: {
     textAlign: "justify",
-    letterSpacing: 1.25,
+    letterSpacing: 1,
   },
   educationText: {
-    letterSpacing: 1.25,
+    letterSpacing: 1.5,
     paddingBottom: 8,
   },
   courseText: {
     textTransform: "uppercase",
-    letterSpacing: 1.25,
+    letterSpacing: 1.5,
     paddingBottom: 4,
   },
 });

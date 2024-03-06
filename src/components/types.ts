@@ -1,3 +1,5 @@
+import fonts from "@src/theme/fonts";
+
 export type FontWeight =
   | "normal"
   | "bold"
@@ -18,3 +20,15 @@ export type JustifyContentType =
   | "space-between"
   | "space-around"
   | "space-evenly";
+
+export type FontFamily =
+  | "Black"
+  | "Bold"
+  | "ExtraBold"
+  | "ExtraLight"
+  | "Light"
+  | "Medium"
+  | "Regular"
+  | "SemiBold";
+
+export type FontSize = keyof typeof fonts.size;

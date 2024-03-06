@@ -1,9 +1,9 @@
 export default {
   size: {
-    small: 12,
-    regular: 16,
-    large: 20,
-    subHeading: 25,
-    heading: 30,
+    small: 16,
+    regular: 20,
+    large: 24,
+    subHeading: 28,
+    heading: 40,
   },
 };

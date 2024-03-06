@@ -37,30 +37,43 @@ const RootPage = () => {
       <Animated.ScrollView
         ref={scrollViewRef}
         pagingEnabled
+        scrollEnabled={containerHeight !== 0}
         scrollEventThrottle={32}
         style={{ width: "100%" }}
         onLayout={onLayout}
       >
+        <MainSection
+          containerHeight={containerHeight}
+          onPressNextPage={() => scrollToNextSection(1)}
+        />
+
+        {/*
+        need to set conditionally on other components
+        there's an issue in web where it lands to random a section after page loads
+        */}
         {containerHeight !== 0 && (
-          <>
-            <MainSection
-              containerHeight={containerHeight}
-              onPressNextPage={() => scrollToNextSection(1)}
-            />
-            <AboutSection
-              containerHeight={containerHeight}
-              onPressNextPage={() => scrollToNextSection(2)}
-            />
-            <ExperienceSection
-              containerHeight={containerHeight}
-              onPressNextPage={() => scrollToNextSection(3)}
-            />
-            <ProfessionalSkillsSection
-              containerHeight={containerHeight}
-              onPressNextPage={() => scrollToNextSection(4)}
-            />
-            <GetInTouchSection containerHeight={containerHeight} />
-          </>
+          <AboutSection
+            containerHeight={containerHeight}
+            onPressNextPage={() => scrollToNextSection(2)}
+          />
+        )}
+
+        {containerHeight !== 0 && (
+          <ExperienceSection
+            containerHeight={containerHeight}
+            onPressNextPage={() => scrollToNextSection(3)}
+          />
+        )}
+
+        {containerHeight !== 0 && (
+          <ProfessionalSkillsSection
+            containerHeight={containerHeight}
+            onPressNextPage={() => scrollToNextSection(4)}
+          />
+        )}
+
+        {containerHeight !== 0 && (
+          <GetInTouchSection containerHeight={containerHeight} />
         )}
       </Animated.ScrollView>
     </LinearGradient>

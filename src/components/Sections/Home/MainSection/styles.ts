@@ -22,6 +22,6 @@ export const mainSectionStyles = StyleSheet.create({
     alignSelf: "flex-end",
     width: "80%",
     textAlign: "right",
-    letterSpacing: 1.25,
+    letterSpacing: 1.5,
   },
 });

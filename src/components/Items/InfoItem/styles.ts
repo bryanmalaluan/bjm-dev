@@ -9,6 +9,6 @@ export const infoItemStyles = StyleSheet.create({
   },
   label: {
     paddingLeft: 16,
-    letterSpacing: 1.25,
+    letterSpacing: 1.5,
   },
 });

@@ -1,7 +1,7 @@
 import { PixelRatio, useWindowDimensions } from "react-native";
 
 const useResponsiveLayout = () => {
-  const { height } = useWindowDimensions();
+  const { height, width } = useWindowDimensions();
 
   /**
    * use for responsive scaling of view size
@@ -16,10 +16,12 @@ const useResponsiveLayout = () => {
     return value;
   };
 
-  const scaleFont = (size: number) => {
+  const scaleFont = (size: number, isHeader?: boolean) => {
+    // width of device is greater than tablet size scale header
+    const initialSize = width >= 800 && isHeader ? size + 40 : size;
     const scale = height / 844;
-    const maxSize = size + 5;
-    let newSize = size * scale;
+    const maxSize = initialSize + 5;
+    let newSize = initialSize * scale;
     newSize = newSize > maxSize ? maxSize : newSize;
 
     const value = Math.round(PixelRatio.roundToNearestPixel(newSize));

@@ -5,7 +5,6 @@ import Image from "@src/components/Image";
 import Text from "@src/components/Text";
 import useResponsiveLayout from "@src/hooks/useResponsiveLayout";
 import colors from "@src/theme/colors";
-import fonts from "@src/theme/fonts";
 import React from "react";
 
 import { mainSectionStyles } from "./styles";
@@ -57,7 +56,6 @@ const MainSection = ({
             size="heading"
             fontFamily="Bold"
             style={{
-              textTransform: "uppercase",
               letterSpacing: 1.5,
               marginTop: 16,
             }}
@@ -68,14 +66,13 @@ const MainSection = ({
           <Text
             color={colors.brand.light}
             size="subHeading"
-            fontFamily="Bold"
+            fontFamily="SemiBold"
             style={{
-              textTransform: "uppercase",
-              letterSpacing: 2,
+              letterSpacing: 1.25,
               marginTop: 8,
             }}
           >
-            Mobile App Developer
+            mobile app developer
           </Text>
         </Column>
       </Row>
@@ -87,7 +84,7 @@ const MainSection = ({
         <Text
           color={colors.light}
           size="subHeading"
-          fontFamily="SemiBold"
+          fontFamily="Medium"
           style={mainSectionStyles.bottomText}
         >
           Transforming ideas into seamless mobile experiences is my passion and

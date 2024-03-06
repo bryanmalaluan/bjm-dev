@@ -18,7 +18,7 @@ const useResponsiveLayout = () => {
 
   const scaleFont = (size: number, isHeader?: boolean) => {
     // width of device is greater than tablet size scale header
-    const initialSize = width >= 800 && isHeader ? size + 40 : size;
+    const initialSize = width >= 800 && isHeader ? size + 30 : size;
     const scale = height / 844;
     const maxSize = initialSize + 5;
     let newSize = initialSize * scale;

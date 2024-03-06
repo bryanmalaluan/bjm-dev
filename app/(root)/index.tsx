@@ -37,7 +37,6 @@ const RootPage = () => {
       <Animated.ScrollView
         ref={scrollViewRef}
         pagingEnabled
-        scrollEnabled={containerHeight !== 0}
         scrollEventThrottle={32}
         style={{ width: "100%" }}
         onLayout={onLayout}

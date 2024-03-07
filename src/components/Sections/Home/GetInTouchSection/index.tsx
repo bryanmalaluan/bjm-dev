@@ -18,8 +18,7 @@ const GetInTouchSection = ({ containerHeight }: GetInTouchSectionProps) => {
 
       <Text
         color="light"
-        size="large"
-        lineHeight={fonts.size.large + 4}
+        lineHeight={fonts.size.regular + 4}
         style={getInTouchSectionStyles.summaryText}
       >
         Thank you for taking the time to review my portfolio. If you have any

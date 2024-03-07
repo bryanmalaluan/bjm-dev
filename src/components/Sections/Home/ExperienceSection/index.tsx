@@ -33,12 +33,11 @@ const ExperienceSection = ({
         <SectionTitle title="Experience" />
 
         <FlatList
-          pointerEvents="none"
           data={[1, 2, 3]}
           renderItem={renderItem}
           keyExtractor={keyExtractor}
           scrollEnabled={false}
-          style={{ width: "100%" }}
+          style={{ width: "100%", pointerEvents: "none" }}
           contentContainerStyle={{ paddingBottom: 20 }}
           ItemSeparatorComponent={itemSeparatorComponent}
         />

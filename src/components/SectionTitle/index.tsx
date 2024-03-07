@@ -1,4 +1,3 @@
-import colors from "@src/theme/colors";
 import React from "react";
 
 import { sectionTitleStyles } from "./styles";
@@ -11,7 +10,7 @@ interface SectionTitleProps {
 const SectionTitle = ({ title }: SectionTitleProps) => {
   return (
     <Text
-      color={colors.light}
+      color="light"
       size="subHeading"
       fontFamily="SemiBold"
       style={sectionTitleStyles.text}

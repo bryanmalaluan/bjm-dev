@@ -31,7 +31,7 @@ const RootPage = () => {
 
   return (
     <LinearGradient
-      colors={[colors.dark, colors.dark, colors.dark, colors.brand.dark]}
+      colors={[colors.dark, colors.dark, colors.dark, colors["brand-dark"]]}
       style={{ flex: 1, width: "100%" }}
     >
       <Animated.ScrollView

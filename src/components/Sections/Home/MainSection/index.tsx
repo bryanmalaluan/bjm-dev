@@ -4,7 +4,6 @@ import { Column, Row, SectionContainer } from "@src/components/Containers";
 import Image from "@src/components/Image";
 import Text from "@src/components/Text";
 import useResponsiveLayout from "@src/hooks/useResponsiveLayout";
-import colors from "@src/theme/colors";
 import React from "react";
 
 import { mainSectionStyles } from "./styles";
@@ -52,7 +51,7 @@ const MainSection = ({
           />
 
           <Text
-            color={colors.light}
+            color="light"
             size="heading"
             fontFamily="Bold"
             style={{
@@ -64,7 +63,7 @@ const MainSection = ({
           </Text>
 
           <Text
-            color={colors.brand.light}
+            color="brand-light"
             size="subHeading"
             fontFamily="SemiBold"
             style={{
@@ -82,7 +81,7 @@ const MainSection = ({
         style={mainSectionStyles.bottomContainer}
       >
         <Text
-          color={colors.light}
+          color="light"
           size="subHeading"
           fontFamily="Medium"
           style={mainSectionStyles.bottomText}

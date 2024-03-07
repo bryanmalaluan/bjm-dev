@@ -57,7 +57,7 @@ const InfoItem = ({ label, type, paddingTop }: InfoItemProps) => {
         {icon}
       </Column>
 
-      <Text color={colors.light} style={infoItemStyles.label}>
+      <Text color="light" style={infoItemStyles.label}>
         {label}
       </Text>
     </Row>

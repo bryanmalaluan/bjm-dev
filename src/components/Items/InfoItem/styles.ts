@@ -5,7 +5,7 @@ export const infoItemStyles = StyleSheet.create({
   iconContainer: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: colors.light,
+    backgroundColor: colors["brand-light"],
   },
   label: {
     paddingLeft: 16,

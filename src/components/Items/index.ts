@@ -1,3 +1,4 @@
+import ConnectItem from "./ConnectItem";
 import InfoItem from "./InfoItem";
 
-export { InfoItem };
+export { ConnectItem, InfoItem };

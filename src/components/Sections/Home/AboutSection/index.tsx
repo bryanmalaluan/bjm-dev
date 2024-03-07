@@ -3,7 +3,6 @@ import { Column, SectionContainer } from "@src/components/Containers";
 import { InfoItem } from "@src/components/Items";
 import SectionTitle from "@src/components/SectionTitle";
 import Text from "@src/components/Text";
-import useResponsiveLayout from "@src/hooks/useResponsiveLayout";
 import colors from "@src/theme/colors";
 import fonts from "@src/theme/fonts";
 import React from "react";
@@ -28,7 +27,7 @@ const AboutSection = ({
         <SectionTitle title="About" />
 
         <Text
-          color={colors.light}
+          color="light"
           lineHeight={fonts.size.regular + 4}
           style={aboutSectionStyles.summaryText}
         >
@@ -55,14 +54,14 @@ const AboutSection = ({
           <Text
             size="large"
             fontFamily="SemiBold"
-            color={colors.light}
+            color="light"
             style={aboutSectionStyles.educationText}
           >
             Education
           </Text>
 
           <Text
-            color={colors.light}
+            color="light"
             lineHeight={fonts.size.regular + 2}
             style={aboutSectionStyles.courseText}
           >
@@ -72,7 +71,7 @@ const AboutSection = ({
           <Text
             size="small"
             fontFamily="SemiBold"
-            color={colors.light}
+            color="brand-light"
             style={{ letterSpacing: 1.5 }}
           >
             FEU Institute of Technology

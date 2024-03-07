@@ -1,3 +1,4 @@
+import colors from "@src/theme/colors";
 import fonts from "@src/theme/fonts";
 
 export type FontWeight =
@@ -32,3 +33,5 @@ export type FontFamily =
   | "SemiBold";
 
 export type FontSize = keyof typeof fonts.size;
+
+export type FontColor = keyof typeof colors;

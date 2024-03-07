@@ -35,19 +35,19 @@ const ExperienceCard = () => {
 
       <Column style={experienceCardStyles.subContainer}>
         <Column style={{ maxWidth: 475 }}>
-          <Text color={colors.light} fontFamily="SemiBold">
+          <Text color="light" fontFamily="SemiBold">
             Senior React Native Developer
           </Text>
 
           <Text
-            color={colors.nude.light}
+            color="brand-light"
             size="small"
             fontFamily="Medium"
             style={{ marginTop: 4 }}
           >
             First Table{" "}
             <Text
-              color={colors.nude.light}
+              color="brand-light"
               size="small"
               style={{ fontStyle: "italic" }}
             >
@@ -56,7 +56,7 @@ const ExperienceCard = () => {
           </Text>
 
           <Text
-            color={colors.light}
+            color="light"
             size="small"
             lineHeight={fonts.size.small + 2}
             style={{ marginTop: 8 }}

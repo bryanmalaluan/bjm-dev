@@ -17,6 +17,7 @@ export const mainSectionStyles = StyleSheet.create({
     flex: 1,
     width: "100%",
     paddingTop: 16,
+    justifyContent: "space-between",
   },
   bottomText: {
     alignSelf: "flex-end",

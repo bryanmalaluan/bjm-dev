@@ -1,11 +1,13 @@
 import * as Images from "@src/assets/images";
 import { SectionPageButton } from "@src/components/Buttons";
-import { Column, Row, SectionContainer } from "@src/components/Containers";
+import { Row, SectionContainer } from "@src/components/Containers";
 import Image from "@src/components/Image";
 import Text from "@src/components/Text";
 import useResponsiveLayout from "@src/hooks/useResponsiveLayout";
 import React from "react";
+import Animated from "react-native-reanimated";
 
+import { useMainSectionAnimation } from "./hooks/useMainSectionAnimation";
 import { mainSectionStyles } from "./styles";
 
 interface MainSectionProps {
@@ -19,25 +21,29 @@ const MainSection = ({
 }: MainSectionProps) => {
   const { scaleSize } = useResponsiveLayout();
 
+  const { animatedImageStyle, animatedDetailsStyle, animatedBottomStyle } =
+    useMainSectionAnimation({ disabled: containerHeight === 0 });
+
   return (
     <SectionContainer containerHeight={containerHeight}>
-      <Image
+      <Animated.Image
         source={Images.Phone}
         style={[
           mainSectionStyles.phoneImage,
           {
             height: scaleSize(500),
             width: scaleSize(500),
-            right: -scaleSize(200),
             top: scaleSize(50),
+            right: -scaleSize(200),
           },
+          animatedImageStyle,
         ]}
       />
 
       <Row
         style={[mainSectionStyles.infoContainer, { height: scaleSize(500) }]}
       >
-        <Column style={{ flex: 0.7 }}>
+        <Animated.View style={[animatedDetailsStyle, { flex: 0.7 }]}>
           <Image
             source={undefined}
             style={[
@@ -73,12 +79,11 @@ const MainSection = ({
           >
             mobile app developer
           </Text>
-        </Column>
+        </Animated.View>
       </Row>
 
-      <Column
-        justifyContent="space-between"
-        style={mainSectionStyles.bottomContainer}
+      <Animated.View
+        style={[mainSectionStyles.bottomContainer, animatedBottomStyle]}
       >
         <Text
           color="light"
@@ -91,7 +96,7 @@ const MainSection = ({
         </Text>
 
         <SectionPageButton onPress={onPressNextPage} />
-      </Column>
+      </Animated.View>
     </SectionContainer>
   );
 };

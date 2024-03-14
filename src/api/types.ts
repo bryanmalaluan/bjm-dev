@@ -14,8 +14,17 @@ export type User = {
   instagram: string;
   getInTouchText: string;
   professionalSkills: { id: string }[];
-  educations: { id: string }[];
+  educations: Education[];
   experiences: { id: string }[];
   dateCreated: Date;
   dateModified: Date;
+};
+
+export type Education = {
+  id: string;
+  course: string;
+  endDate: string;
+  school: string;
+  specialization: string;
+  startDate: string;
 };

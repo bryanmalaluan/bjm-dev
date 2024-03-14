@@ -3,6 +3,7 @@ import { Column, SectionContainer } from "@src/components/Containers";
 import { InfoItem } from "@src/components/Items";
 import SectionTitle from "@src/components/SectionTitle";
 import Text from "@src/components/Text";
+import { userState$ } from "@src/legend-state/user";
 import colors from "@src/theme/colors";
 import fonts from "@src/theme/fonts";
 import React from "react";
@@ -18,6 +19,26 @@ const AboutSection = ({
   containerHeight,
   onPressNextPage,
 }: AboutSectionProps) => {
+  const user = userState$.user;
+
+  const education = React.useMemo(() => {
+    const userEducation = user.educations[0].get() ?? undefined;
+    let course = "";
+    let school = "";
+    let year = "";
+
+    if (userEducation) {
+      course = `${userEducation.course} with ${userEducation.specialization}`;
+      school = userEducation.school;
+
+      const startDate = new Date(userEducation.startDate);
+      const endDate = new Date(userEducation.endDate);
+      year = `(${startDate.getFullYear().toString()} - ${endDate.getFullYear().toString()})`;
+    }
+
+    return { course, school, year };
+  }, [user.educations.get()]);
+
   return (
     <SectionContainer
       containerHeight={containerHeight}
@@ -31,23 +52,13 @@ const AboutSection = ({
           lineHeight={fonts.size.regular + 4}
           style={aboutSectionStyles.summaryText}
         >
-          Experienced mobile developer with a proven track record of over 8
-          years in designing, developing, and deploying robust mobile
-          applications. Adept at leveraging the full potential of React Native
-          framework to create efficient, scalable, and visually appealing
-          cross-platform solutions. Well-versed in collaborating with
-          cross-functional teams, including UI/UX designers and backend
-          developers, to ensure seamless integration and optimal performance.
+          {user.summary.get()}
         </Text>
 
         <Column style={{ paddingVertical: 40 }}>
-          <InfoItem label="Philippines" type="location" />
-          <InfoItem
-            label="bryanmalaluan@gmail.com"
-            type="email"
-            paddingTop={12}
-          />
-          <InfoItem label="+639276793202" type="phone" paddingTop={12} />
+          <InfoItem label={user.location.get()} type="location" />
+          <InfoItem label={user.email.get()} type="email" paddingTop={12} />
+          <InfoItem label={user.phone.get()} type="phone" paddingTop={12} />
         </Column>
 
         <Column>
@@ -65,7 +76,7 @@ const AboutSection = ({
             lineHeight={fonts.size.regular + 2}
             style={aboutSectionStyles.courseText}
           >
-            BS IN COMPUTER SCIENCE WITH SPECIALIZATION IN SOFTWARE ENGINEERING
+            {education.course}
           </Text>
 
           <Text
@@ -74,7 +85,14 @@ const AboutSection = ({
             color="brand-light"
             style={{ letterSpacing: 1.5 }}
           >
-            FEU Institute of Technology
+            {education.school}{" "}
+            <Text
+              size="small"
+              color="brand-light"
+              style={{ fontStyle: "italic", letterSpacing: 1.5 }}
+            >
+              {education.year}
+            </Text>
           </Text>
         </Column>
       </Column>

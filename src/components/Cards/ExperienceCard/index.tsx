@@ -1,4 +1,6 @@
+import { Experience } from "@src/api/types";
 import { Column, Row } from "@src/components/Containers";
+import Image from "@src/components/Image";
 import Text from "@src/components/Text";
 import useResponsiveLayout from "@src/hooks/useResponsiveLayout";
 import colors from "@src/theme/colors";
@@ -7,8 +9,24 @@ import React from "react";
 
 import { experienceCardStyles } from "./styles";
 
-const ExperienceCard = () => {
+interface ExperienceCardProps {
+  experience: Experience;
+}
+
+const ExperienceCard = ({ experience }: ExperienceCardProps) => {
   const { scaleFont } = useResponsiveLayout();
+
+  const yearAttended = React.useMemo(() => {
+    const startDate = new Date(experience.startDate);
+    const endDate = experience.endDate
+      ? new Date(experience.endDate)
+      : undefined;
+    const endDateMonth = endDate ? endDate.getMonth() : 0;
+
+    return experience.isCurrent
+      ? `(${startDate.getMonth() + 1}/${startDate.getFullYear()} - Present)`
+      : `(${startDate.getMonth() + 1}/${startDate.getFullYear()} - ${endDateMonth + 1}/${endDate?.getFullYear()})`;
+  }, [experience.startDate, experience.endDate, experience.isCurrent]);
 
   return (
     <Row justifyContent="center" style={{ width: "100%" }}>
@@ -25,7 +43,16 @@ const ExperienceCard = () => {
               borderRadius: scaleFont(50),
             },
           ]}
-        />
+        >
+          <Image
+            source={{ uri: experience.image }}
+            style={{
+              height: scaleFont(42),
+              width: scaleFont(42),
+              borderRadius: scaleFont(42),
+            }}
+          />
+        </Column>
 
         <Column
           backgroundColor={colors.light}
@@ -36,7 +63,7 @@ const ExperienceCard = () => {
       <Column style={experienceCardStyles.subContainer}>
         <Column style={{ maxWidth: 475 }}>
           <Text color="light" fontFamily="SemiBold">
-            Senior React Native Developer
+            {experience.jobTitle}
           </Text>
 
           <Text
@@ -45,13 +72,13 @@ const ExperienceCard = () => {
             fontFamily="Medium"
             style={{ marginTop: 4 }}
           >
-            First Table{" "}
+            {experience.company}{" "}
             <Text
               color="brand-light"
               size="small"
               style={{ fontStyle: "italic" }}
             >
-              (Oct. 2019 - Present)
+              {yearAttended}
             </Text>
           </Text>
 
@@ -61,10 +88,7 @@ const ExperienceCard = () => {
             lineHeight={fonts.size.small + 2}
             style={{ marginTop: 8 }}
           >
-            I am the principal mobile developer. I constructed the application
-            entirely using React-Native and TypeScript, then published it on the
-            iOS App Store and Google Play Store. Additionally, I implemented
-            unit testing.
+            {experience.summary}
           </Text>
         </Column>
       </Column>

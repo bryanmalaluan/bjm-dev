@@ -1,7 +1,9 @@
+import { Experience } from "@src/api/types";
 import { SectionPageButton } from "@src/components/Buttons";
 import { ExperienceCard } from "@src/components/Cards";
 import { Column, Row, SectionContainer } from "@src/components/Containers";
 import SectionTitle from "@src/components/SectionTitle";
+import { userState$ } from "@src/legend-state/user";
 import React from "react";
 import { FlatList } from "react-native";
 
@@ -14,12 +16,14 @@ const ExperienceSection = ({
   containerHeight,
   onPressNextPage,
 }: ExperienceSectionProps) => {
-  const renderItem = React.useCallback(() => {
-    return <ExperienceCard />;
+  const experiences = userState$.user.experiences;
+
+  const renderItem = React.useCallback(({ item }: { item: Experience }) => {
+    return <ExperienceCard experience={item} />;
   }, []);
 
   const keyExtractor = React.useCallback(
-    (item, index) => `key-${item}${index}`,
+    (item: Experience, index: number) => `key-${item.id}${index}`,
     [],
   );
 
@@ -33,7 +37,7 @@ const ExperienceSection = ({
         <SectionTitle title="Experience" />
 
         <FlatList
-          data={[1, 2, 3]}
+          data={experiences.get()}
           renderItem={renderItem}
           keyExtractor={keyExtractor}
           scrollEnabled={false}

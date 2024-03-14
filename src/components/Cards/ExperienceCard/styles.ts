@@ -5,6 +5,7 @@ export const experienceCardStyles = StyleSheet.create({
   companyAvatar: {
     borderWidth: 2,
     borderColor: colors.light,
+    overflow: "hidden",
   },
   subContainer: {
     flex: 1,

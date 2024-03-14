@@ -15,7 +15,7 @@ export type User = {
   getInTouchText: string;
   professionalSkills: { id: string }[];
   educations: Education[];
-  experiences: { id: string }[];
+  experiences: Experience[];
   dateCreated: Date;
   dateModified: Date;
 };
@@ -23,8 +23,19 @@ export type User = {
 export type Education = {
   id: string;
   course: string;
-  endDate: string;
+  endDate: Date;
   school: string;
   specialization: string;
-  startDate: string;
+  startDate: Date;
+};
+
+export type Experience = {
+  company: "string";
+  endDate: Date | null;
+  id: string;
+  image: string;
+  isCurrent: true;
+  jobTitle: string;
+  startDate: Date;
+  summary: string;
 };

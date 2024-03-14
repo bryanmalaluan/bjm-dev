@@ -4,6 +4,7 @@ import { Row, SectionContainer } from "@src/components/Containers";
 import Image from "@src/components/Image";
 import Text from "@src/components/Text";
 import useResponsiveLayout from "@src/hooks/useResponsiveLayout";
+import { userState$ } from "@src/legend-state/user";
 import React from "react";
 import Animated from "react-native-reanimated";
 
@@ -19,6 +20,7 @@ const MainSection = ({
   containerHeight,
   onPressNextPage,
 }: MainSectionProps) => {
+  const user = userState$.user;
   const { scaleSize } = useResponsiveLayout();
 
   const { animatedImageStyle, animatedDetailsStyle, animatedBottomStyle } =
@@ -45,13 +47,17 @@ const MainSection = ({
       >
         <Animated.View style={[animatedDetailsStyle, { flex: 0.7 }]}>
           <Image
-            source={undefined}
+            source={{ uri: user.avatar.get() }}
             style={[
               mainSectionStyles.avatar,
               {
                 height: scaleSize(80),
                 width: scaleSize(80),
                 borderRadius: scaleSize(40),
+                shadowOffset: { width: 0, height: -10 },
+                shadowOpacity: 1,
+                shadowRadius: 2,
+                shadowColor: "#fff",
               },
             ]}
           />
@@ -65,7 +71,7 @@ const MainSection = ({
               marginTop: 16,
             }}
           >
-            Bryan James Malaluan
+            {`${user.firstName.get()} ${user.lastName.get()}`}
           </Text>
 
           <Text
@@ -73,11 +79,12 @@ const MainSection = ({
             size="subHeading"
             fontFamily="SemiBold"
             style={{
+              textTransform: "lowercase",
               letterSpacing: 1.25,
               marginTop: 8,
             }}
           >
-            mobile app developer
+            {user.headline.get()}
           </Text>
         </Animated.View>
       </Row>
@@ -91,8 +98,7 @@ const MainSection = ({
           fontFamily="Medium"
           style={mainSectionStyles.bottomText}
         >
-          Transforming ideas into seamless mobile experiences is my passion and
-          profession
+          {user.introText.get()}
         </Text>
 
         <SectionPageButton onPress={onPressNextPage} />

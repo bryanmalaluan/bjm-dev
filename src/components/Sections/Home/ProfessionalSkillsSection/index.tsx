@@ -7,16 +7,19 @@ import { userState$ } from "@src/legend-state/user";
 import colors from "@src/theme/colors";
 import React from "react";
 import { FlatList, useWindowDimensions } from "react-native";
+import { SharedValue } from "react-native-reanimated";
 
 import { professionalSkillsSectionStyles } from "./styles";
 
 interface ProfessionalSkillsSectionProps {
   containerHeight: number;
+  startAnimation: SharedValue<boolean>;
   onPressNextPage?: () => void;
 }
 
 const ProfessionalSkillsSection = ({
   containerHeight,
+  startAnimation,
   onPressNextPage,
 }: ProfessionalSkillsSectionProps) => {
   const professionalSkills = userState$.user.professionalSkills;
@@ -26,8 +29,14 @@ const ProfessionalSkillsSection = ({
   const numColumns = width >= 800 ? 3 : 2;
 
   const renderItem = React.useCallback(
-    ({ item }: { item: ProfessionalSkill }) => {
-      return <ProfessionalSkillCard label={item.title} rating={item.rating} />;
+    ({ item, index }: { item: ProfessionalSkill; index: number }) => {
+      return (
+        <ProfessionalSkillCard
+          label={item.title}
+          rating={item.rating}
+          startAnimation={startAnimation}
+        />
+      );
     },
     [],
   );

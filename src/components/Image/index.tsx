@@ -7,13 +7,7 @@ interface ImageProps extends RNImageProps {}
 const StyledImage = styled.Image<ImageProps>``;
 
 const Image = (props: ImageProps) => {
-  return (
-    <StyledImage
-      accessibilityRole="image"
-      {...props}
-      style={[{ backgroundColor: "gray" }, props?.style]}
-    />
-  );
+  return <StyledImage accessibilityRole="image" {...props} />;
 };
 
 export default Image;

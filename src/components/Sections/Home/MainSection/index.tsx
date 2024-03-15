@@ -54,10 +54,6 @@ const MainSection = ({
                 height: scaleSize(80),
                 width: scaleSize(80),
                 borderRadius: scaleSize(40),
-                shadowOffset: { width: 0, height: -10 },
-                shadowOpacity: 1,
-                shadowRadius: 2,
-                shadowColor: "#fff",
               },
             ]}
           />

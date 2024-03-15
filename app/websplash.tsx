@@ -16,7 +16,10 @@ const WebSplashPage = () => {
     >
       <Image
         source={Images.Icon}
-        style={{ height: scaleSize(200), width: scaleSize(200) }}
+        style={{
+          height: scaleSize(200),
+          width: scaleSize(200),
+        }}
       />
     </Container>
   );

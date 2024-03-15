@@ -16,9 +16,12 @@ import Animated, {
 
 const RootPage = () => {
   const scrollViewRef = React.useRef<Animated.ScrollView>(null);
+
   const [containerHeight, setContainerHeight] = React.useState(0);
 
+  const sharedHeight = useSharedValue(0);
   const animateExperiences = useSharedValue(false);
+  const animateProfessionalSkills = useSharedValue(false);
 
   const scrollToNextSection = (index: number) => {
     if (scrollViewRef?.current) {
@@ -31,7 +34,9 @@ const RootPage = () => {
   };
 
   const onLayout = React.useCallback((event: LayoutChangeEvent) => {
-    setContainerHeight(event.nativeEvent.layout.height);
+    const { height } = event.nativeEvent.layout;
+    sharedHeight.value = height; // store in shared value to work with scroll animation
+    setContainerHeight(height);
   }, []);
 
   const animatedScrollHandler = useAnimatedScrollHandler({
@@ -39,11 +44,17 @@ const RootPage = () => {
       const { y } = event.contentOffset;
 
       // add by 1 to correctly get section index
-      const sectionIndex = y / containerHeight + 1;
+      const sectionIndex = Math.round(y / sharedHeight.value + 1);
 
+      // animate only once
       // animate experiences initially if scrolled to section
       if (!animateExperiences.value && sectionIndex === 3) {
         animateExperiences.value = true;
+      }
+
+      // animate professional skills initially if scrolled to section
+      if (!animateProfessionalSkills.value && sectionIndex === 4) {
+        animateProfessionalSkills.value = true;
       }
     },
   });
@@ -88,6 +99,7 @@ const RootPage = () => {
         {containerHeight !== 0 && (
           <ProfessionalSkillsSection
             containerHeight={containerHeight}
+            startAnimation={animateProfessionalSkills}
             onPressNextPage={() => scrollToNextSection(4)}
           />
         )}

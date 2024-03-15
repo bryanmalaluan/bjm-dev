@@ -23,14 +23,15 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
       : undefined;
     const endDateMonth = endDate ? endDate.getMonth() : 0;
 
-    return experience.isCurrent
-      ? `(${startDate.getMonth() + 1}/${startDate.getFullYear()} - Present)`
-      : `(${startDate.getMonth() + 1}/${startDate.getFullYear()} - ${endDateMonth + 1}/${endDate?.getFullYear()})`;
+    const endDateText = experience.isCurrent
+      ? "Present"
+      : `${endDateMonth + 1}/${endDate?.getFullYear()}`;
+
+    return `(${startDate.getMonth() + 1}/${startDate.getFullYear()} - ${endDateText})`;
   }, [experience.startDate, experience.endDate, experience.isCurrent]);
 
   return (
     <Row justifyContent="center" style={{ width: "100%" }}>
-      {/* company avatar here */}
       <Column alignItems="center" style={{ height: "100%" }}>
         <Column
           alignItems="center"

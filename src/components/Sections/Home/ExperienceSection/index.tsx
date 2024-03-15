@@ -23,7 +23,7 @@ const ExperienceSection = ({
   }, []);
 
   const keyExtractor = React.useCallback(
-    (item: Experience, index: number) => `key-${item.id}${index}`,
+    (item: Experience) => `key-${item.id}`,
     [],
   );
 

@@ -13,7 +13,7 @@ export type User = {
   github: string;
   instagram: string;
   getInTouchText: string;
-  professionalSkills: { id: string }[];
+  professionalSkills: ProfessionalSkill[];
   educations: Education[];
   experiences: Experience[];
   dateCreated: Date;
@@ -38,4 +38,10 @@ export type Experience = {
   jobTitle: string;
   startDate: Date;
   summary: string;
+};
+
+export type ProfessionalSkill = {
+  id: string;
+  rating: number;
+  title: string;
 };

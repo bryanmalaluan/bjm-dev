@@ -1,7 +1,9 @@
+import { ProfessionalSkill } from "@src/api/types";
 import { SectionPageButton } from "@src/components/Buttons";
 import { ProfessionalSkillCard } from "@src/components/Cards";
 import { Column, Row, SectionContainer } from "@src/components/Containers";
 import SectionTitle from "@src/components/SectionTitle";
+import { userState$ } from "@src/legend-state/user";
 import colors from "@src/theme/colors";
 import React from "react";
 import { FlatList, useWindowDimensions } from "react-native";
@@ -17,21 +19,26 @@ const ProfessionalSkillsSection = ({
   containerHeight,
   onPressNextPage,
 }: ProfessionalSkillsSectionProps) => {
+  const professionalSkills = userState$.user.professionalSkills;
+
   const { width } = useWindowDimensions();
 
   const numColumns = width >= 800 ? 3 : 2;
 
-  const renderItem = React.useCallback(({ item }) => {
-    return <ProfessionalSkillCard label={`Skill - ${item}`} rating={4} />;
-  }, []);
+  const renderItem = React.useCallback(
+    ({ item }: { item: ProfessionalSkill }) => {
+      return <ProfessionalSkillCard label={item.title} rating={item.rating} />;
+    },
+    [],
+  );
 
   const keyExtractor = React.useCallback(
-    (item, index) => `key-${item}${index}`,
+    (item: ProfessionalSkill) => `key-${item.id}`,
     [],
   );
 
   const itemSeparatorComponent = React.useCallback(() => {
-    return <Row style={{ height: 24, width: 24 }} />;
+    return <Row style={professionalSkillsSectionStyles.itemSeparator} />;
   }, []);
 
   return (
@@ -44,7 +51,7 @@ const ProfessionalSkillsSection = ({
 
         <FlatList
           key={numColumns}
-          data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+          data={professionalSkills.get()}
           renderItem={renderItem}
           keyExtractor={keyExtractor}
           scrollEnabled={false}

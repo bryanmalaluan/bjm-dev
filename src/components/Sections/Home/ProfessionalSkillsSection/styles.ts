@@ -5,4 +5,8 @@ export const professionalSkillsSectionStyles = StyleSheet.create({
     flex: 1,
     width: "100%",
   },
+  itemSeparator: {
+    height: 24,
+    width: 24,
+  },
 });

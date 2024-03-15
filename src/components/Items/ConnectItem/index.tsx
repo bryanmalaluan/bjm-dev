@@ -7,7 +7,7 @@ import React from "react";
 
 interface ConnectItemProps {
   label: string;
-  type: "email" | "linkedin" | "instagram";
+  type: "email" | "linkedin" | "github" | "instagram";
   paddingTop?: number;
 }
 
@@ -29,6 +29,15 @@ const ConnectItem = ({ label, type, paddingTop }: ConnectItemProps) => {
         return (
           <AntDesign
             name="instagram"
+            size={scaleFont(24)}
+            color={colors["brand-light"]}
+          />
+        );
+
+      case "github":
+        return (
+          <AntDesign
+            name="github"
             size={scaleFont(24)}
             color={colors["brand-light"]}
           />

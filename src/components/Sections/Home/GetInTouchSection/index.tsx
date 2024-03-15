@@ -2,7 +2,9 @@ import { Column, SectionContainer } from "@src/components/Containers";
 import { ConnectItem } from "@src/components/Items";
 import SectionTitle from "@src/components/SectionTitle";
 import Text from "@src/components/Text";
+import { userState$ } from "@src/legend-state/user";
 import fonts from "@src/theme/fonts";
+import { formatSiteText } from "@src/utils/dataFormat";
 import React from "react";
 
 import { getInTouchSectionStyles } from "./styles";
@@ -12,6 +14,8 @@ interface GetInTouchSectionProps {
 }
 
 const GetInTouchSection = ({ containerHeight }: GetInTouchSectionProps) => {
+  const user = userState$.user;
+
   return (
     <SectionContainer containerHeight={containerHeight}>
       <SectionTitle title="Get In Touch" />
@@ -21,11 +25,7 @@ const GetInTouchSection = ({ containerHeight }: GetInTouchSectionProps) => {
         lineHeight={fonts.size.regular + 4}
         style={getInTouchSectionStyles.summaryText}
       >
-        Thank you for taking the time to review my portfolio. If you have any
-        questions, inquiries, or would like to discuss a potential project,
-        please don't hesitate to reach out to me. I'm passionate about creating
-        innovative mobile applications and would love to collaborate with you to
-        bring your ideas to life.
+        {user.getInTouchText.get()}
       </Text>
 
       <Column style={{ paddingTop: 48 }}>
@@ -38,9 +38,22 @@ const GetInTouchSection = ({ containerHeight }: GetInTouchSectionProps) => {
           Let's Connect
         </Text>
 
-        <ConnectItem label="sample@gmail.com" type="email" />
-        <ConnectItem label="/in/sampleurl" type="linkedin" paddingTop={8} />
-        <ConnectItem label="@sampleurl" type="instagram" paddingTop={8} />
+        <ConnectItem label={user.email.get()} type="email" />
+        <ConnectItem
+          label={formatSiteText(user.linkedIn.get(), "linkedin")}
+          type="linkedin"
+          paddingTop={8}
+        />
+        <ConnectItem
+          label={formatSiteText(user.github.get(), "github")}
+          type="github"
+          paddingTop={8}
+        />
+        <ConnectItem
+          label={formatSiteText(user.instagram.get(), "instagram")}
+          type="instagram"
+          paddingTop={8}
+        />
       </Column>
     </SectionContainer>
   );

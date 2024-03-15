@@ -6,21 +6,35 @@ import SectionTitle from "@src/components/SectionTitle";
 import { userState$ } from "@src/legend-state/user";
 import React from "react";
 import { FlatList } from "react-native";
+import { SharedValue } from "react-native-reanimated";
 
 interface ExperienceSectionProps {
   containerHeight: number;
+  startAnimation: SharedValue<boolean>;
   onPressNextPage?: () => void;
 }
 
 const ExperienceSection = ({
   containerHeight,
+  startAnimation,
   onPressNextPage,
 }: ExperienceSectionProps) => {
   const experiences = userState$.user.experiences;
 
-  const renderItem = React.useCallback(({ item }: { item: Experience }) => {
-    return <ExperienceCard experience={item} />;
-  }, []);
+  const renderItem = React.useCallback(
+    ({ item, index }: { item: Experience; index: number }) => {
+      const duration = index * 200;
+
+      return (
+        <ExperienceCard
+          experience={item}
+          duration={duration}
+          startAnimation={startAnimation}
+        />
+      );
+    },
+    [],
+  );
 
   const keyExtractor = React.useCallback(
     (item: Experience) => `key-${item.id}`,

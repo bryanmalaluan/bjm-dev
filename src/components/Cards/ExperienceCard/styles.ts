@@ -2,6 +2,11 @@ import colors from "@src/theme/colors";
 import { StyleSheet } from "react-native";
 
 export const experienceCardStyles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "center",
+  },
   companyAvatar: {
     borderWidth: 2,
     borderColor: colors.light,

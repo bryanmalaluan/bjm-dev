@@ -9,11 +9,16 @@ import colors from "@src/theme/colors";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { LayoutChangeEvent } from "react-native";
-import Animated from "react-native-reanimated";
+import Animated, {
+  useAnimatedScrollHandler,
+  useSharedValue,
+} from "react-native-reanimated";
 
 const RootPage = () => {
   const scrollViewRef = React.useRef<Animated.ScrollView>(null);
   const [containerHeight, setContainerHeight] = React.useState(0);
+
+  const animateExperiences = useSharedValue(false);
 
   const scrollToNextSection = (index: number) => {
     if (scrollViewRef?.current) {
@@ -29,6 +34,20 @@ const RootPage = () => {
     setContainerHeight(event.nativeEvent.layout.height);
   }, []);
 
+  const animatedScrollHandler = useAnimatedScrollHandler({
+    onScroll: (event) => {
+      const { y } = event.contentOffset;
+
+      // add by 1 to correctly get section index
+      const sectionIndex = y / containerHeight + 1;
+
+      // animate experiences initially if scrolled to section
+      if (!animateExperiences.value && sectionIndex === 3) {
+        animateExperiences.value = true;
+      }
+    },
+  });
+
   return (
     <LinearGradient
       colors={[colors.dark, colors.dark, colors.dark, colors["brand-dark"]]}
@@ -37,9 +56,10 @@ const RootPage = () => {
       <Animated.ScrollView
         ref={scrollViewRef}
         pagingEnabled
-        scrollEventThrottle={32}
+        scrollEventThrottle={16}
         style={{ width: "100%" }}
         onLayout={onLayout}
+        onScroll={animatedScrollHandler}
       >
         <MainSection
           containerHeight={containerHeight}
@@ -60,6 +80,7 @@ const RootPage = () => {
         {containerHeight !== 0 && (
           <ExperienceSection
             containerHeight={containerHeight}
+            startAnimation={animateExperiences}
             onPressNextPage={() => scrollToNextSection(3)}
           />
         )}

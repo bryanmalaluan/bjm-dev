@@ -1,20 +1,32 @@
 import { Experience } from "@src/api/types";
-import { Column, Row } from "@src/components/Containers";
+import { Column } from "@src/components/Containers";
 import Image from "@src/components/Image";
 import Text from "@src/components/Text";
 import useResponsiveLayout from "@src/hooks/useResponsiveLayout";
 import colors from "@src/theme/colors";
 import fonts from "@src/theme/fonts";
 import React from "react";
+import Animated, { SharedValue } from "react-native-reanimated";
 
+import useExperienceCardAnimation from "./hooks/useExperienceCardAnimation";
 import { experienceCardStyles } from "./styles";
 
 interface ExperienceCardProps {
   experience: Experience;
+  duration: number;
+  startAnimation: SharedValue<boolean>;
 }
 
-const ExperienceCard = ({ experience }: ExperienceCardProps) => {
+const ExperienceCard = ({
+  experience,
+  duration,
+  startAnimation,
+}: ExperienceCardProps) => {
   const { scaleFont } = useResponsiveLayout();
+  const { animatedStyle } = useExperienceCardAnimation({
+    startAnimation,
+    duration,
+  });
 
   const yearAttended = React.useMemo(() => {
     const startDate = new Date(experience.startDate);
@@ -31,7 +43,7 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
   }, [experience.startDate, experience.endDate, experience.isCurrent]);
 
   return (
-    <Row justifyContent="center" style={{ width: "100%" }}>
+    <Animated.View style={[experienceCardStyles.container, animatedStyle]}>
       <Column alignItems="center" style={{ height: "100%" }}>
         <Column
           alignItems="center"
@@ -93,7 +105,7 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => {
           </Text>
         </Column>
       </Column>
-    </Row>
+    </Animated.View>
   );
 };
 

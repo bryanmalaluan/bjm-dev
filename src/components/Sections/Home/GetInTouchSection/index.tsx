@@ -1,3 +1,4 @@
+import { Button } from "@src/components/Buttons";
 import { Column, SectionContainer } from "@src/components/Containers";
 import { ConnectItem } from "@src/components/Items";
 import SectionTitle from "@src/components/SectionTitle";
@@ -5,6 +6,7 @@ import Text from "@src/components/Text";
 import { userState$ } from "@src/legend-state/user";
 import fonts from "@src/theme/fonts";
 import { formatSiteText } from "@src/utils/dataFormat";
+import { downloadFile } from "@src/utils/files";
 import React from "react";
 
 import { getInTouchSectionStyles } from "./styles";
@@ -28,7 +30,7 @@ const GetInTouchSection = ({ containerHeight }: GetInTouchSectionProps) => {
         {user.getInTouchText.get()}
       </Text>
 
-      <Column style={{ paddingTop: 48 }}>
+      <Column style={{ paddingVertical: 48 }}>
         <Text
           size="large"
           fontFamily="SemiBold"
@@ -55,6 +57,15 @@ const GetInTouchSection = ({ containerHeight }: GetInTouchSectionProps) => {
           paddingTop={8}
         />
       </Column>
+
+      {/* show download button if user has uploaded a resume/cv */}
+      {!!user.cv.get() && (
+        <Button
+          label="Download CV"
+          alignSelf="center"
+          onPress={() => downloadFile({ url: user.cv.peek() })}
+        />
+      )}
     </SectionContainer>
   );
 };

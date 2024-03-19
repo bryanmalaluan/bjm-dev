@@ -9,6 +9,7 @@ export type User = {
   introText: string;
   summary: string;
   avatar: string;
+  cv: string | null;
   linkedIn: string;
   github: string;
   instagram: string;

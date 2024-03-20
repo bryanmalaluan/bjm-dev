@@ -2,7 +2,7 @@ import Text from "@src/components/Text";
 import { FontColor, FontSize } from "@src/components/types";
 import colors from "@src/theme/colors";
 import React from "react";
-import { FlexAlignType } from "react-native";
+import { ActivityIndicator, FlexAlignType } from "react-native";
 
 import { buttonStyles } from "./styles";
 import Pressable from "../Pressable";
@@ -14,6 +14,7 @@ interface ButtonProps {
   alignSelf?: "auto" | FlexAlignType;
   borderWidth?: number;
   borderColor?: string;
+  loading?: boolean;
   onPress?: () => void;
 }
 
@@ -24,6 +25,7 @@ const Button = ({
   alignSelf,
   borderWidth = 2,
   borderColor = colors["brand-light"],
+  loading,
   onPress,
 }: ButtonProps) => {
   return (
@@ -34,16 +36,21 @@ const Button = ({
           { opacity: pressed ? 0.7 : 1, alignSelf, borderWidth, borderColor },
         ];
       }}
+      disabled={loading}
       onPress={onPress}
     >
-      <Text
-        size={labelSize}
-        color={labelColor}
-        fontFamily="Medium"
-        style={{ letterSpacing: 1.25 }}
-      >
-        {label}
-      </Text>
+      {!loading ? (
+        <Text
+          size={labelSize}
+          color={labelColor}
+          fontFamily="Medium"
+          style={{ letterSpacing: 1.25 }}
+        >
+          {label}
+        </Text>
+      ) : (
+        <ActivityIndicator color={colors.light} />
+      )}
     </Pressable>
   );
 };

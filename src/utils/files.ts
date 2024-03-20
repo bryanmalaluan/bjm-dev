@@ -1,3 +1,4 @@
+import { loadingState$ } from "@src/legend-state/loading";
 import { userState$ } from "@src/legend-state/user";
 import * as FileSystem from "expo-file-system";
 import * as Linking from "expo-linking";
@@ -52,29 +53,38 @@ export const saveFile = async ({
  */
 export const downloadFile = async ({ url }: { url: string }) => {
   const user = userState$.user;
+  const loading = loadingState$.loading;
 
-  // web has different approach, it will only opens the url
-  if (Platform.OS === "web") {
-    const isValid = await Linking.canOpenURL(url);
+  try {
+    loading.set(true);
 
-    if (isValid) {
-      await Linking.openURL(url);
+    // web has different approach, it will only opens the url
+    if (Platform.OS === "web") {
+      const isValid = await Linking.canOpenURL(url);
+
+      if (isValid) {
+        await Linking.openURL(url);
+      }
+
+      return;
     }
 
-    return;
+    // downloading file only works for ios and android in saving device folder
+    const filename = `${user.lastName.peek()}_CV.pdf`;
+    const result = await FileSystem.downloadAsync(
+      url,
+      FileSystem.documentDirectory + filename,
+    );
+
+    // save the downloaded file
+    saveFile({
+      uri: result.uri,
+      filename,
+      mimetype: result.headers["Content-Type"],
+    });
+  } catch (ex) {
+    console.error(ex);
+  } finally {
+    loading.set(false);
   }
-
-  // downloading file only works for ios and android in saving device folder
-  const filename = `${user.lastName.peek()}_CV.pdf`;
-  const result = await FileSystem.downloadAsync(
-    url,
-    FileSystem.documentDirectory + filename,
-  );
-
-  // save the downloaded file
-  saveFile({
-    uri: result.uri,
-    filename,
-    mimetype: result.headers["Content-Type"],
-  });
 };
